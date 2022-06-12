@@ -22,7 +22,7 @@ class Sprite {
         this.framesMax = framesMax
         this.framesCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 8
+        this.framesHold = 6
     }
     draw() {
       c.drawImage(this.image, this.framesCurrent * (this.image.width / this.framesMax), 0, this.image.width / this.framesMax, this.image.height, this.position.x, this.position.y, (this.image.width / this.framesMax) * this.scale, this.image.height * this.scale) 
@@ -59,9 +59,11 @@ class Sprite {
     framesMax: 6
   })
   
-class Fighter {
-  constructor({position, velocity, color = 'red', offset}) {
-      this.position = position
+class Fighter extends Sprite {
+  constructor({position, velocity, color = 'red', offset,  imageSrc, scale = 1, framesMax = 1}) {
+      super ( {
+        imageSrc, scale, framesMax, position
+      })
       this.velocity = velocity
       this.width = 50
       this.height = 150
@@ -78,6 +80,9 @@ class Fighter {
       this.color = color
       this.isAttacking
       this.health = 100
+      this.framesCurrent = 0
+      this.framesElapsed = 0
+      this.framesHold = 6
   }
 
   draw() {
@@ -123,7 +128,9 @@ const player = new Fighter({
   offset: {
     x: 0,
     y: 0
-  }
+  },
+  imageSrc: './img/samuraiMack/Idle.png',
+  framesMax: 8
 })
 
 
